@@ -28,6 +28,8 @@
 #define IS_IPHONE5 ([UIScreen mainScreen].bounds.size.height==568)
 #define IS_IOS6_OR_LOWER (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1)
 
+
+
 @interface ABPadLockScreenView()
 
 @property (nonatomic, assign) BOOL requiresRotationCorrection;
@@ -75,13 +77,32 @@
     return self;
 }
 
+
+- (NSBundle*) bundle {
+    NSBundle * bundle;
+
+    NSURL * resourceURL = [[NSBundle mainBundle]URLForResource:@"ABPadLockScreenBundle" withExtension:@"bundle"];
+    
+    if(resourceURL) {
+        bundle = [NSBundle bundleWithURL:resourceURL];
+    }else {
+        bundle = [NSBundle mainBundle];
+    }
+    return bundle;
+}
+
+- (NSString*) getLocalizedString:(NSString*) key {
+    NSBundle * bundle = [self bundle];
+    return [bundle localizedStringForKey:key value:@"" table:nil];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self)
     {
         [self setDefaultStyles];
-		
+        
 		_contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, MIN(frame.size.height, 568.0f))];
 		_contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
 		_contentView.center = self.center;
@@ -90,7 +111,7 @@
         _requiresRotationCorrection = NO;
         
         _enterPasscodeLabel = [self standardLabel];
-        _enterPasscodeLabel.text = NSLocalizedString(@"Enter Passcode", @"");
+        _enterPasscodeLabel.text = [self getLocalizedString:@"ENTER_PASSCODE"];
         
         _detailLabel = [self standardLabel];
         
@@ -115,16 +136,16 @@
 		}
 		
 		_cancelButton = [UIButton buttonWithType:buttonType];
-        [_cancelButton setTitle:NSLocalizedString(@"Cancel", @"") forState:UIControlStateNormal];
+        [_cancelButton setTitle: [self getLocalizedString:@"CANCEL"] forState:UIControlStateNormal];
 		_cancelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         
         _deleteButton = [UIButton buttonWithType:buttonType];
-        [_deleteButton setTitle:NSLocalizedString(@"Delete", @"") forState:UIControlStateNormal];
+        [_deleteButton setTitle: [self getLocalizedString:@"DELETE"] forState:UIControlStateNormal];
 		_deleteButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         _deleteButton.alpha = 0.0f;
         
 		_okButton = [UIButton buttonWithType:buttonType];
-		[_okButton setTitle:NSLocalizedString(@"OK", @"") forState:UIControlStateNormal];
+		[_okButton setTitle: [self getLocalizedString:@"OK"] forState:UIControlStateNormal];
 		_okButton.alpha = 0.0f;
 		_okButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 		

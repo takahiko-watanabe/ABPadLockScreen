@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '5.0'
   s.ios.deployment_target = '5.0'
 
-  s.source       = { :git => "https://github.com/sujrd/ABPadLockScreen.git" }
+  s.source       = { :git => "https://github.com/michaelhenry/ABPadLockScreen.git" }
 
   s.source_files  = 'ABPadLockScreen', 'ABPadLockScreen/**/*.{h,m}'
 

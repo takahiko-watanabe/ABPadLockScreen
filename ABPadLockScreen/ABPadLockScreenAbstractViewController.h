@@ -59,6 +59,6 @@
 
 @protocol ABPadLockScreenDelegate <NSObject>
 @required
-- (void)unlockWasCancelledForPadLockScreenViewController:(ABPadLockScreenAbstractViewController *)padLockScreenViewController;
+- (void)unlockWasCancelledForPadLockScreenAbstractViewController:(ABPadLockScreenAbstractViewController *)padLockScreenViewController;
 
 @end

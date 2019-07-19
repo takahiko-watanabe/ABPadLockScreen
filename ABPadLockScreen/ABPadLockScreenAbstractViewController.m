@@ -260,6 +260,14 @@
     }
 }
 
+- (void)deleteAllFromPin
+{
+    for (int i = 0; i < [self.currentPin length]; i++)
+    {
+        [self deleteFromPin];
+    }
+}
+
 - (void)buttonSelected:(UIButton *)sender
 {
     NSInteger tag = sender.tag;

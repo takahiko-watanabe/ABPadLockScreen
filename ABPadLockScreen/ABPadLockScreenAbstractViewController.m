@@ -262,7 +262,8 @@
 
 - (void)deleteAllFromPin
 {
-    for (int i = 0; i < [self.currentPin length]; i++)
+    int currentPinLength = (int)[self.currentPin length];
+    for (int i = 0; i < currentPinLength; i++)
     {
         [self deleteFromPin];
     }
